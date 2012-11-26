@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">AndroidUtils</string>
+
+    <!-- License checking status messages -->
+    <string name="check_license">Check license</string>
+    <string name="checking_license">Checking license…</string>
+    <string name="dont_allow">Don\'t allow the user access</string>
+    <string name="allow">Allow the user access</string>
+    <string name="application_error">Application error: %1$s</string>
+
+    <!-- Unlicensed dialog messages -->
+    <string name="unlicensed_dialog_title">Application not licensed</string>
+    <string name="unlicensed_dialog_body">This application is not licensed. Please purchase it from Android Market.
+    </string>
+    <string name="unlicensed_dialog_retry_body">Unable to validate license. Check to see if a network connection is
+        available.
+    </string>
+    <string name="buy_button">Buy app</string>
+    <string name="retry_button">Retry</string>
+    <string name="quit_button">Exit</string>
+
+    <!-- License errors -->
+    <string name="error_invalid_package_name">The application has invalid package name</string>
+    <string name="error_non_matching_uid">Non matching UID</string>
+    <string name="error_not_market_managed">Not market managed. Seems the application is not published.</string>
+    <string name="error_check_in_progress">Check in progress. The license is already checking.</string>
+    <string name="error_invalid_public_key">The application uses invalid public key.</string>
+    <string name="error_missing_permissions">Missing license checking permissions.</string>
+</resources>

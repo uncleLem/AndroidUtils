@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+        <!-- You may want to use RelativeLayout instead of LinearLayout -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical"
+              android:gravity="center_horizontal">
+
+    <FrameLayout
+            android:id="@+id/page_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="visible"
+            >
+    </FrameLayout>
+
+    <com.google.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ads:adSize="SMART_BANNER"
+            ads:adUnitId="yourUnitID">
+    </com.google.ads.AdView>
+
+</LinearLayout>
