@@ -4,7 +4,7 @@ While writing this, I tried to follow KISS principle.
 So, there's small overview about existing utils:
 
 utils
- |- StringUtils             - some useful methods for strings (now there's only one method)
+ |- StringUtils             - some useful methods for Strings
  |
  |- view                    - this package contains several activities with some
  |  |                         basic functionality
