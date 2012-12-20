@@ -26,4 +26,8 @@
     <string name="error_check_in_progress">Check in progress. The license is already checking.</string>
     <string name="error_invalid_public_key">The application uses invalid public key.</string>
     <string name="error_missing_permissions">Missing license checking permissions.</string>
+
+    <!-- Misc -->
+    <string name="gps_title">GPS is not enabled</string>
+    <string name="gps_msg">Open settings to enable GPS?</string>
 </resources>
