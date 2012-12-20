@@ -5,6 +5,8 @@ So, there's small overview about existing utils:
 
 utils
  |- StringUtils             - some useful methods for Strings
+ |- Locations               - a little bit simplified way to recieve current user's location
+ |- UserPreferences         - easy way to use default Android's SharedPreferences
  |
  |- view                    - this package contains several activities with some
  |  |                         basic functionality
@@ -21,7 +23,7 @@ utils
  |
  '- social                  - this is package with several utilities for social networks.
     |                         And e-mail.
-    |- EmailSender          - send e-mail with specified subject and message.
+    |- EmailSender          - send e-mail with specified recepient(s), subject and message.
     |                         You can also send file via e-mail.
     |- FacebookSender       - with this class you can share images and/or messages
     |                         to your wall in the name of your app
