@@ -2,8 +2,8 @@ package ua.a5.androidutils.utils.view;
 
 import android.app.Activity;
 import android.os.Bundle;
-import com.chartboost.sdk.ChartBoost;
-import com.chartboost.sdk.ChartBoostDelegate;
+import com.chartboost.sdk.Chartboost;
+import com.chartboost.sdk.ChartboostDelegate;
 
 /**
  * In order to add promotion to app you have to:
@@ -12,42 +12,35 @@ import com.chartboost.sdk.ChartBoostDelegate;
  * 3) in "More Apps Page" section enter your existing and already registered apps names
  * which you want to represent in your More Apps Page
  * 4) if necessary, add created app to others app's "More Apps Page" sections
- * 5) call setupChartBoost(String, String) in onCreate() method of your activity
- * 6) call showMoreApps() to show More Apps screen
+ * 5) change APP_ID, APP_SIGNATURE and (if necessary) CHARTBOOST_DELEGATE
+ * 6) call showMoreApps() to show MoreApps screen
+ * 7) you may also want to override onBackPressed method (https://help.chartboost.com/documentation/android)
  *
  * @author Sergey Khokhlov
  */
 public class ActivityWithMoreApps extends Activity {
-    private ChartBoost _cb;
+    private Chartboost _cb;
+    private static String APP_ID = "APP_ID";
+    private static String APP_SIGNATURE = "APP_SIGNATURE";
+    private static ChartboostDelegate CHARTBOOST_DELEGATE = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        _cb = ChartBoost.getSharedChartBoost(this);
+        _cb = Chartboost.sharedChartboost();
+        _cb.onCreate(this, APP_ID, APP_SIGNATURE, CHARTBOOST_DELEGATE);
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        _cb = ChartBoost.getSharedChartBoost(this);
+    protected void onStart() {
+        super.onStart();
+        _cb.onStart(this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-    }
-
-    public void setupChartBoost(String appId, String appSignature, ChartBoostDelegate customDelegate) {
-        _cb.setAppId(appId);
-        _cb.setAppSignature(appSignature);
-        _cb.setDelegate(customDelegate);
-        _cb.install();
-    }
-
-    public void setupChartBoost(String appId, String appSignature) {
-        _cb.setAppId(appId);
-        _cb.setAppSignature(appSignature);
-        _cb.install();
+        _cb.onStop(this);
     }
 
     public void showMoreApps() {
