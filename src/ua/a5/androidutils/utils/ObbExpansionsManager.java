@@ -13,6 +13,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
+ * For more info about APK Expansion files see http://developer.android.com/google/play/expansion-files.html
  * @author Sergey Khokhlov
  */
 public class ObbExpansionsManager {
