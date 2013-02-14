@@ -14,6 +14,7 @@ import java.util.TimerTask;
 
 /**
  * For more info about APK Expansion files see http://developer.android.com/google/play/expansion-files.html
+ *
  * @author Sergey Khokhlov
  */
 public class ObbExpansionsManager {
@@ -34,7 +35,7 @@ public class ObbExpansionsManager {
 
     private static ObbExpansionsManager instance;
 
-    public ObbExpansionsManager(Context context, final ObbListener listener) {
+    private ObbExpansionsManager(Context context, final ObbListener listener) {
         Log.d(TAG, "Creating new instance...");
         packageName = context.getPackageName();
         Log.d(TAG, "Package name = " + packageName);
@@ -96,7 +97,7 @@ public class ObbExpansionsManager {
             listener.onFilesNotFound();
         }
     }
-    
+
     private void mountPatch() {
         if (patchFile.exists()) {
             Log.d(TAG, "Mounting patch file...");
@@ -147,19 +148,62 @@ public class ObbExpansionsManager {
         }
     }
 
+    public static boolean isMainFileExists(Context context) {
+        String packageName = context.getPackageName();
+        Log.d(TAG, "Package name = " + packageName);
+        int packageVersion = getAppVersionCode(context);
+        Log.d(TAG, "Package version = " + packageVersion);
+        File main = new File(Environment.getExternalStorageDirectory() + "/Android/obb/" + packageName + "/"
+                + "main." + packageVersion + "." + packageName + ".obb");
+        Log.d(TAG, "Check if main file " + main.getAbsolutePath() + " exists: " + main.exists());
+        return main.exists();
+    }
+
+    public static boolean isPatchFileExists(Context context) {
+        String packageName = context.getPackageName();
+        Log.d(TAG, "Package name = " + packageName);
+        int packageVersion = getAppVersionCode(context);
+        Log.d(TAG, "Package version = " + packageVersion);
+        File patch = new File(Environment.getExternalStorageDirectory() + "/Android/obb/" + packageName + "/"
+                + "patch." + packageVersion + "." + packageName + ".obb");
+        Log.d(TAG, "Check if patch file " + patch.getAbsolutePath() + " exists: " + patch.exists());
+        return patch.exists();
+    }
+
+    public static int getAppVersionCode(Context context) {
+        int versionCode = 1;
+        try {
+            PackageInfo pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            versionCode = pInfo.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return versionCode;
+    }
+
+    public String getMainRoot() {
+        return sm.getMountedObbPath(mainFile.getAbsolutePath());
+    }
+
+    public String getPatchRoot() {
+        return sm.getMountedObbPath(patchFile.getAbsolutePath());
+    }
+
     /**
      * Use this method to create (or reinit) manager
+     *
      * @param context
      * @param listener
      * @return
      */
     public static ObbExpansionsManager createNewInstance(Context context, ObbListener listener) {
-        instance = new ObbExpansionsManager(context,listener);
+        instance = new ObbExpansionsManager(context, listener);
         return instance;
     }
 
     /**
      * Use this method to get existing instance of manager
+     *
      * @return instance of manager. If null - call createNewInstance to create new one
      */
     public static ObbExpansionsManager getInstance() {
@@ -168,6 +212,7 @@ public class ObbExpansionsManager {
 
     /**
      * First, read from patch file. If patch doesn't contains file - search for it in main.
+     *
      * @param pathToFile - path to file inside of .obb
      * @return
      */
@@ -188,6 +233,7 @@ public class ObbExpansionsManager {
 
     /**
      * Read file directly from main extension file
+     *
      * @param pathToFile - path to file inside of .obb
      * @return
      */
@@ -204,6 +250,7 @@ public class ObbExpansionsManager {
 
     /**
      * Read file directly from patch extension file
+     *
      * @param pathToFile - path to file inside of .obb
      * @return
      */
@@ -256,10 +303,10 @@ public class ObbExpansionsManager {
             Log.d(TAG, "MountChecker: Check if " + (isMainFile ? "main" : "patch") + " file mounted without calling callback: " +
                     sm.isObbMounted(mainFile.getAbsolutePath()));
             File file = isMainFile ? mainFile : patchFile;
-            if (sm!= null && file != null && sm.isObbMounted(file.getAbsolutePath())) {
+            if (sm != null && file != null && sm.isObbMounted(file.getAbsolutePath())) {
                 if (isMainFile) {
-                main = sm.getMountedObbPath(file.getAbsolutePath());
-                listener.onMountSuccess();
+                    main = sm.getMountedObbPath(file.getAbsolutePath());
+                    listener.onMountSuccess();
                 } else {
                     patch = sm.getMountedObbPath(file.getAbsolutePath());
                 }
