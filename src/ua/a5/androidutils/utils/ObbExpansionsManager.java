@@ -60,34 +60,17 @@ public class ObbExpansionsManager {
 
         Log.d(TAG, "Check if path file already mounted: " + sm.isObbMounted(patchFile.getAbsolutePath()));
         if (sm.isObbMounted(patchFile.getAbsolutePath())) {
-            Log.d(TAG, "Patch file already mounted. Unmounting...");
-            sm.unmountObb(patchFile.getAbsolutePath(), true, new OnObbStateChangeListener() {
-                @Override
-                public void onObbStateChange(String path, int state) {
-                    super.onObbStateChange(path, state);
-                    if (state == UNMOUNTED) {
-                        Log.d(TAG, "Patch file successfully unmounted.");
-                        mountPatch();
-                    }
-                }
-            });
+            Log.d(TAG, "Patch file already mounted.");
+            patch = sm.getMountedObbPath(patchFile.getAbsolutePath());
         } else {
             mountPatch();
         }
 
         Log.d(TAG, "Check if main file already mounted: " + sm.isObbMounted(mainFile.getAbsolutePath()));
         if (sm.isObbMounted(mainFile.getAbsolutePath())) {
-            Log.d(TAG, "Main file already mounted. Unmounting...");
-            sm.unmountObb(mainFile.getAbsolutePath(), true, new OnObbStateChangeListener() {
-                @Override
-                public void onObbStateChange(String path, int state) {
-                    super.onObbStateChange(path, state);
-                    if (state == UNMOUNTED) {
-                        Log.d(TAG, "Main file successfully unmounted.");
-                        mountMain();
-                    }
-                }
-            });
+            Log.d(TAG, "Main file already mounted.");
+            main = sm.getMountedObbPath(mainFile.getAbsolutePath());
+            listener.onMountSuccess();
         } else {
             mountMain();
         }
