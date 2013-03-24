@@ -7,7 +7,8 @@ utils
  |- StringUtils             - some useful methods for Strings
  |- Locations               - a little bit simplified way to recieve current user's location
  |- UserPreferences         - easy way to use default Android's SharedPreferences
- |- ObbExpansionsManager    - if your APK is more than 50 MB you definitely will need some class like this
+ |- ObbExpansionsManager    - if your APK is more than 50 MB you definitely will need some
+ |                            class like this
  |
  |- view                    - this package contains several activities with some
  |  |                         basic functionality
