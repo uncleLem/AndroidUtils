@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640" />
+
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>Android Utils by uncleLem</title>
+  </head>
+
+  <body>
+    <a id="forkme_banner" href="https://github.com/uncleLem/AndroidUtils">View on GitHub</a>
+    <div class="shell">
+
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>Android Utils</h1>
+            <h2>Several useful classes for Android developers</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
+
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/uncleLem/AndroidUtils/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/uncleLem/AndroidUtils/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
+
+
+      <span class="banner-fix"></span>
+
+
+      <section id="main_content">
+        <p>This project contains several useful classes for Android developers.</p>
+
+<p>While writing this, I tried to follow KISS principle, so I don't think that you'll have any problems with using and understanding those utils.</p>
+
+<p>Most of this code was developed while I worked in <a href="http://a5.ua/">A5</a> and by A5 team. We hope you can find something useful here.</p>
+
+<h1>
+<a name="%D0%A1ontents" class="anchor" href="#%D0%A1ontents"><span class="octicon octicon-link"></span></a>Сontents</h1>
+
+<h3>
+<a name="misc" class="anchor" href="#misc"><span class="octicon octicon-link"></span></a>Misc</h3>
+
+<ul>
+<li>
+<strong>ObbExpansionsManager</strong> - if your APK is more than 50 MB you definitely will need some class like this. <em>(see also: <strong>LicensedActivity</strong>)</em>
+</li>
+<li>
+<strong>StringUtils</strong> - some useful methods for Strings</li>
+<li>
+<strong>Locations</strong> - a little bit simplified way to recieve current user's location <em>(not sure if it works good enough, any improvements are invited)</em>
+</li>
+<li>
+<strong>UserPreferences</strong> - easy way to use default Android's SharedPreferences</li>
+</ul><h3>
+<a name="view" class="anchor" href="#view"><span class="octicon octicon-link"></span></a>View</h3>
+
+<p>This package contains several activities with some basic functionality</p>
+
+<ul>
+<li>
+<strong>ActivityWithAds</strong> - add Ads to your app and start to make money</li>
+<li>
+<strong>ActivityWithMoreApps</strong> - this activity will allow you to show "More Apps" screen <em>(I'm using Chartboost service, it's really simple and useful)</em>
+</li>
+<li>
+<strong>LicensedActivity</strong> - use this class if you want to create paid application with licensing control. Licensing is also required if you want to create app with expansion files and integrate it with Google Play <em>(see also: <strong>SimplePolicy</strong>, <strong>ObbExpansionsManager</strong>)</em>
+</li>
+</ul><h3>
+<a name="licensing" class="anchor" href="#licensing"><span class="octicon octicon-link"></span></a>Licensing</h3>
+
+<ul>
+<li>
+<strong>SimplePolicy</strong> - simplified version of <strong>ServerManagedPolicy</strong>. <em><strong>DON'T FORGET TO CHANGE SALT!</strong></em>
+</li>
+</ul><h3>
+<a name="social" class="anchor" href="#social"><span class="octicon octicon-link"></span></a>Social</h3>
+
+<p>This is package with several utilities for social networks. And e-mail.</p>
+
+<ul>
+<li>
+<strong>EmailSender</strong> - send e-mail with specified recepient(s), subject and message. You can also send file via e-mail using this sender.</li>
+<li>
+<strong>FacebookSender</strong> - with this class you can share images and/or messages to your wall in the name of your app</li>
+<li>
+<strong>TwitterSender</strong> - same as <strong>FacebookSender</strong>, but for Twitter.</li>
+<li>
+<strong>SenderCallback</strong> - UI callbacks for <strong>TwitterSender</strong> and <strong>FacebookSender</strong>
+</li>
+</ul><p>See descriptions of each class for further information.</p>
+      </section>
+
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/uncleLem">uncleLem</a> can be found on <a href="https://github.com/uncleLem/AndroidUtils">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
+      </footer>
+
+    </div>
+
+    
+  </body>
+</html>
