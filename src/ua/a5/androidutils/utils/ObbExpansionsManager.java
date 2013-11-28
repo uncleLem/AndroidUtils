@@ -16,6 +16,7 @@ import java.util.TimerTask;
  * For more info about APK Expansion files see http://developer.android.com/google/play/expansion-files.html
  *
  * @author Sergey Khokhlov
+ * 
  */
 public class ObbExpansionsManager {
     public static String TAG = "ObbExpansions";
@@ -58,7 +59,7 @@ public class ObbExpansionsManager {
         mainFile = new File(Environment.getExternalStorageDirectory() + "/Android/obb/" + packageName + "/"
                 + "main." + packageVersion + "." + packageName + ".obb");
 
-        Log.d(TAG, "Check if path file already mounted: " + sm.isObbMounted(patchFile.getAbsolutePath()));
+        Log.d(TAG, "Check if patch file already mounted: " + sm.isObbMounted(patchFile.getAbsolutePath()));
         if (sm.isObbMounted(patchFile.getAbsolutePath())) {
             Log.d(TAG, "Patch file already mounted.");
             patch = sm.getMountedObbPath(patchFile.getAbsolutePath());
@@ -84,19 +85,7 @@ public class ObbExpansionsManager {
     private void mountPatch() {
         if (patchFile.exists()) {
             Log.d(TAG, "Mounting patch file...");
-            sm.mountObb(patchFile.getAbsolutePath(), null, new OnObbStateChangeListener() {
-                @Override
-                public void onObbStateChange(String path, int state) {
-                    super.onObbStateChange(path, state);
-                    if (state == MOUNTED) {
-                        Log.d(TAG, "Mounting patch file done.");
-                        patch = sm.getMountedObbPath(patchFile.getAbsolutePath());
-                    } else {
-                        Log.d(TAG, "Mounting patch file failed with state = " + state);
-                        listener.onObbStateChange(path, state);
-                    }
-                }
-            });
+            sm.mountObb(patchFile.getAbsolutePath(), null, patchObbStateChangeListener );
             if (sm.isObbMounted(patchFile.getAbsolutePath())) {
                 patch = sm.getMountedObbPath(patchFile.getAbsolutePath());
                 listener.onMountSuccess();
@@ -105,31 +94,60 @@ public class ObbExpansionsManager {
             Log.d(TAG, "Patch file not found");
         }
     }
+    
+    
+    // Making the listener into an instance variable ensures that the reference is not lost 
+    // and zeroed in the storage manager before it can be used
+    OnObbStateChangeListener patchObbStateChangeListener = new OnObbStateChangeListener() {
+            @Override
+            public void onObbStateChange(String path, int state) {
+                super.onObbStateChange(path, state);
+                if (state == MOUNTED) {
+                    Log.d(TAG, "Mounting patch file done.");
+                    patch = sm.getMountedObbPath(patchFile.getAbsolutePath());
+                } else {
+                    Log.d(TAG, "Mounting patch file failed with state = " + state);
+                    if ( listener != null )
+                    	listener.onObbStateChange(path, state);
+                }
+            }
+    };
 
     private void mountMain() {
         if (mainFile.exists()) {
             Log.d(TAG, "Mounting main file...");
             Log.d(TAG, "Scheduling mount checker...");
-            (new Timer()).schedule(mainChecker, 1000);
-            sm.mountObb(mainFile.getAbsolutePath(), null, new OnObbStateChangeListener() {
-                @Override
-                public void onObbStateChange(String path, int state) {
-                    super.onObbStateChange(path, state);
-                    if (state == MOUNTED) {
-                        Log.d(TAG, "Mounting main file done.");
-                        main = sm.getMountedObbPath(mainFile.getAbsolutePath());
-                        listener.onMountSuccess();
-                        mainChecker.cancel();
-                    } else {
-                        Log.d(TAG, "Mounting main file failed with state = " + state);
-                        listener.onObbStateChange(path, state);
-                    }
-                }
-            });
+            // I have left the mount checker in place but extended it's initial activation to
+            // 8 seconds.  If it is clear that this modification is working the mountchecker 
+            // can be removed altogether
+            (new Timer()).schedule(mainChecker, 8000);
+            sm.mountObb(mainFile.getAbsolutePath(), null, mainObbStateChangeListener );
         } else {
             Log.d(TAG, "Patch file not found");
         }
     }
+
+        
+    // Making the listener into an instance variable ensures that the reference is not lost 
+    // and zeroed in the storage manager before it can be used..
+    OnObbStateChangeListener mainObbStateChangeListener = new OnObbStateChangeListener() {
+            @Override
+            public void onObbStateChange(String path, int state) {
+                super.onObbStateChange(path, state);
+                if (state == MOUNTED) {
+                    Log.d(TAG, "Mounting main file done.");
+                    main = sm.getMountedObbPath(mainFile.getAbsolutePath());
+                    if ( listener != null ) {
+                    	listener.onMountSuccess();
+                    	mainChecker.cancel();
+                    }
+                } else {
+                    Log.d(TAG, "Mounting main file failed with state = " + state);
+                    if ( listener != null ) 
+                    	listener.onObbStateChange(path, state);
+                }
+            }
+    };
 
     public static boolean isMainFileExists(Context context) {
         String packageName = context.getPackageName();
