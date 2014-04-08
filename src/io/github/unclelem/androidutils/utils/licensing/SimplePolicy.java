@@ -1,4 +1,4 @@
-package ua.a5.androidutils.utils.licensing;
+package io.github.unclelem.androidutils.utils.licensing;
 
 import android.content.Context;
 import android.provider.Settings;

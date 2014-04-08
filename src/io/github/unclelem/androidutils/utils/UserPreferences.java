@@ -1,9 +1,7 @@
-package ua.a5.androidutils.utils;
+package io.github.unclelem.androidutils.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-
-import java.util.HashMap;
 
 public class UserPreferences {
 

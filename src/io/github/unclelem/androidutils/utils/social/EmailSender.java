@@ -1,4 +1,4 @@
-package ua.a5.androidutils.utils.social;
+package io.github.unclelem.androidutils.utils.social;
 
 import android.content.Context;
 import android.content.Intent;

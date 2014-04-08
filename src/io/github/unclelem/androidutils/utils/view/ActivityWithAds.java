@@ -1,4 +1,4 @@
-package ua.a5.androidutils.utils.view;
+package io.github.unclelem.androidutils.utils.view;
 
 import android.app.Activity;
 import android.os.Bundle;

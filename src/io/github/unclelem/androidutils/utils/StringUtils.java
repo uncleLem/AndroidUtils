@@ -1,4 +1,4 @@
-package ua.a5.androidutils.utils;
+package io.github.unclelem.androidutils.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;

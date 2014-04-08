@@ -1,4 +1,4 @@
-package ua.a5.androidutils.utils;
+package io.github.unclelem.androidutils.utils;
 
 import android.app.AlertDialog;
 import android.content.Context;

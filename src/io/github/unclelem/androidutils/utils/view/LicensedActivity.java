@@ -1,4 +1,4 @@
-package ua.a5.androidutils.utils.view;
+package io.github.unclelem.androidutils.utils.view;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -13,7 +13,7 @@ import com.google.android.vending.licensing.LicenseChecker;
 import com.google.android.vending.licensing.LicenseCheckerCallback;
 import com.google.android.vending.licensing.Policy;
 import ua.a5.androidutils.R;
-import ua.a5.androidutils.utils.licensing.SimplePolicy;
+import io.github.unclelem.androidutils.utils.licensing.SimplePolicy;
 
 /**
  * 1) Add INTERNET and CHECK_LICENSE permissions to your AndroidManifest.xml

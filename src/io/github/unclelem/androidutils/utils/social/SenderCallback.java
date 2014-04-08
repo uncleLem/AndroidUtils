@@ -1,4 +1,4 @@
-package ua.a5.androidutils.utils.social;
+package io.github.unclelem.androidutils.utils.social;
 
 /**
  * Use this class "as is", if you want to post messages in background
